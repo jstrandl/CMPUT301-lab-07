@@ -59,4 +59,41 @@ public class MainActivityTest {
 
         onData(is(instanceOf(String.class))).inAdapterView(withId(R.id.city_list)).atPosition(0).check(matches((withText("Edmonton"))));
     }
+
+    @Test
+    public void testShowActivitySwap() {
+        // Check whether the activity correctly switched
+
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        //TODO: click list item
+        //TODO: check activity type
+    }
+
+    @Test
+    public void testShowActivityCityName() {
+        // Test whether the city name is consistent
+
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        //TODO: click list item
+        //TODO: check label data (as in `testListView`)
+    }
+
+    @Test
+    public void testShowActivityBack() {
+        // Test the "back" button
+
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        //TODO: click list item
+        //TODO: click back button (as above)
+        //TODO: check activity type (as in testShowActivitySwap)
+    }
 }
