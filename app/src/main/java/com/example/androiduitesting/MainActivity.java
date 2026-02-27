@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         cityList.setAdapter(cityAdapter);
         cityList.setOnItemClickListener((parent, view, position, id) -> {
-            // Go to ShowActivity (https://learntodroid.com/how-to-switch-between-activities-in-android/)
+            // Go to ShowActivity (and send city name) (https://learntodroid.com/how-to-switch-between-activities-in-android/)
             Intent showActivityIntent = new Intent(MainActivity.this, ShowActivity.class);
+            showActivityIntent.putExtra("city name", (String) parent.getItemAtPosition(position));
             startActivity(showActivityIntent);
         });
 

@@ -3,12 +3,12 @@ package com.example.androiduitesting;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ShowActivity extends AppCompatActivity {
-    String cityName;
     TextView cityText;
 
     @Override
@@ -18,11 +18,14 @@ public class ShowActivity extends AppCompatActivity {
 
         cityText = findViewById(R.id.city_name);
 
-        cityText.setText(cityName);
+        //Get city name from MainActivity https://learntodroid.com/how-to-switch-between-activities-in-android/
+        cityText.setText(getIntent().getStringExtra("city name"));
 
         final Button backButton = findViewById(R.id.button_back);
         backButton.setOnClickListener(v -> {
             // Go back to main activity (https://learntodroid.com/how-to-switch-between-activities-in-android/)
+            Toast toast = Toast.makeText(this, "Back button pressed", Toast.LENGTH_LONG);
+            toast.show();
             finish();
         });
     }
