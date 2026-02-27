@@ -3,7 +3,7 @@ package com.example.androiduitesting;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +24,7 @@ public class ShowActivity extends AppCompatActivity {
         final Button backButton = findViewById(R.id.button_back);
         backButton.setOnClickListener(v -> {
             // Go back to main activity (https://learntodroid.com/how-to-switch-between-activities-in-android/)
-            Toast toast = Toast.makeText(this, "Back button pressed", Toast.LENGTH_LONG);
-            toast.show();
+//            Toast.makeText(this, "Back button pressed", Toast.LENGTH_LONG).show(); //CHECK
             finish();
         });
     }

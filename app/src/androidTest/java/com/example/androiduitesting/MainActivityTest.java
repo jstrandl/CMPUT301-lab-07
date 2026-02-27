@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 
 import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -29,12 +29,6 @@ import org.junit.runner.RunWith;
 public class MainActivityTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenario = new ActivityScenarioRule<>(MainActivity.class);
-
-    @Rule
-    public IntentsTestRule<MainActivity> intentsTestRule = new IntentsTestRule<>(MainActivity.class);
-
-//    @Rule
-//    public IntentsTestRule<ShowActivity> intentsTestRuleShow = new IntentsTestRule<>(ShowActivity.class);
 
     @Test
     public void testActivity() {
@@ -77,9 +71,11 @@ public class MainActivityTest {
         onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
         onView(withId(R.id.button_confirm)).perform(click());
 
+        Intents.init();
         onData(is(instanceOf(String.class))).inAdapterView(withId(R.id.city_list)).atPosition(0).perform(click());
         // https://developer.android.com/training/testing/espresso/intents
         intended(hasComponent(ShowActivity.class.getName()));
+        Intents.release();
     }
 
     @Test
@@ -106,8 +102,7 @@ public class MainActivityTest {
         onView(withId(R.id.button_confirm)).perform(click());
 
         onData(is(instanceOf(String.class))).inAdapterView(withId(R.id.city_list)).atPosition(0).perform(click());
-        onView(withId(R.id.button_back)).perform(click()); // It doesn't want to click the button, but clicking the button manually works
-        // https://developer.android.com/training/testing/espresso/intents
-        intended(hasComponent(MainActivity.class.getName()));
+        onView(withId(R.id.button_back)).perform(click());
+        onData(is(instanceOf(String.class))).inAdapterView(withId(R.id.city_list)).atPosition(0).check(matches((withText("Edmonton"))));
     }
 }
